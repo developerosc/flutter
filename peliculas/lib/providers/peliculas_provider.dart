@@ -54,7 +54,7 @@ class PeliculasProvider{
       final url = Uri.http(_url, '3/movie/popular',{
         'api_key':_apikey,
         'language':_language,
-        'page':_populares.toString(),
+        'page':_popularesPage.toString(),
       });
 
 
@@ -91,6 +91,26 @@ class PeliculasProvider{
       //print(peliculas.items[1].title);
 
       return cast.actores;
+
+    }
+    Future<List<Pelicula>> buscarPelicula(String query) async{
+
+
+      final url = Uri.http(_url, '3/search/movie',{
+        'api_key':_apikey,
+        'language':_language,
+        'query':query,
+      });
+
+      final resp = await  http.get(url);
+
+      final decodedData = json.decode(resp.body);
+
+      final peliculas = new Peliculas.fromJsonList(decodedData['results']);
+
+      //print(peliculas.items[1].title);
+
+      return peliculas.items;
 
     }
 
