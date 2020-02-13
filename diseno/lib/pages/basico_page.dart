@@ -8,7 +8,8 @@ class BasicoPage extends StatelessWidget {
 
     final _screenTotal = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: SafeArea(child:
+      Container(
         height: _screenTotal.height,
         child: ListView(
           children: <Widget>[
@@ -28,17 +29,46 @@ class BasicoPage extends StatelessWidget {
              ),
          //   Container(child:
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Icon(Icons.share),
-                  Icon(Icons.share),
-                  Icon(Icons.share),
+                  _crearAccion(Icons.call, 'call'),
+                  _crearAccion(Icons.share, 'compartir'),
+                  _crearAccion(Icons.home, 'hola'),
                 ],
               ),
+            _creatTexto(),
+            _creatTexto(),
+            _creatTexto(),
+            _creatTexto(),
+            _creatTexto(),
+            _creatTexto(),
+            _creatTexto(),
         //    ),
           ],
         ),
     ),
+      ),
     );
   }
+
+  Widget _crearAccion(IconData icon,String texto){
+
+    return Column(
+      children: <Widget>[
+        Icon(icon),
+        SizedBox(height: 20.0,),
+        Text(texto),
+      ],
+    );
+  }
+  Widget _creatTexto(){
+
+    return      Container(
+  padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 40.0),
+  child: Text("holahola hgkn dsfihbgersuybfksuyebvzfusbfuvbdkzjxvbkjhfbv",
+  textAlign: TextAlign.justify,
+
+  ),
+  );
+}
 }
