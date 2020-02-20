@@ -1,5 +1,8 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:qrreaderapp/Utils/utils.dart' as utils ;
+import 'package:qrreaderapp/bloc/scan_bloc.dart';
+import 'package:qrreaderapp/models/scan_model.dart';
 import 'package:qrreaderapp/pages/direcciones_page.dart';
 import 'package:qrreaderapp/pages/mapas_page.dart';
 
@@ -10,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-
+  final scanBloc = new ScansBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               icon: Icon(Icons.delete_forever),
               onPressed: (){
-
+                scanBloc.borrarScanTODOS;
           })
         ],
       ),
@@ -68,15 +71,27 @@ class _HomePageState extends State<HomePage> {
 
   void _scanQR() async {
 
-    String futureString = '';
+    //https://www.google.com/
 
-    try {
-      futureString = await BarcodeScanner.scan();
-    }catch(error){
-      futureString = error.toString();
-    }
-    
-    print('future String $futureString');
+    //geo:40.714865545932355,-73.92354383906253
+
+    String futureString = 'https://www.google.com';
+
+//
+//    try {
+//      futureString = await BarcodeScanner.scan();
+//    }catch(error){
+//      futureString = error.toString();
+//    }
+//
+//    print('future String $futureString');
+
+  if(futureString != null){
+
+    final scan = ScanModel(valor: futureString);
+    scanBloc.agregarScan(scan);
+    //utils.abrirScan(scan);
+  }
 
   }
 }
